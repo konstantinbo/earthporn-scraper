@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+#install dependencies
+install: pip install praw
+#run script
+script: python3 scraper.py
+
