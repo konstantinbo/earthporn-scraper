@@ -15,15 +15,21 @@ def get_subs(name, limit, r):
 
 def download_subs(subs, location):
     loop = 0
-    regexp = re.compile(r'((https://i\.)|(\.jpg)$)')
+    regexp = re.compile(r'((https://i\.)|(\.jpg)$|imgur)')
     for x in subs:
         loop += 1
+        url = x.url
         print(loop)
-        print(x.url)
-        if regexp.search(x.url) is not None:
-            filename = x.url.split('/')[-1]
+        print(url)
+        if regexp.search(url) is not None:
+            if 'imgur' in url:
+                url = fix_imgur_link(url)
+            filename = url.split('/')[-1]
             filename = valid_image_name(filename)
-            urllib.request.urlretrieve(x.url, location + filename)
+            try:
+                urllib.request.urlretrieve(url, location + filename)
+            except:
+                print('Error')
 
 
 def valid_image_name(filename):
@@ -34,11 +40,16 @@ def valid_image_name(filename):
         return filename
 
 
+def fix_imgur_link(link):
+    return link.replace('imgur', 'i.imgur', 1) + '.jpg'
+
+
 def main():
     print("Starting call...")
     r = setup('elementary-os:earthporn-scraper:v0.2 (by /u/k0nsi)')
-    subs = get_subs('earthporn', 5, r)
+    subs = get_subs('earthporn', 8, r)
     download_subs(subs, './')
+
 
 if __name__ == '__main__':
     main()
