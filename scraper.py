@@ -27,7 +27,9 @@ def download_subs(subs, location):
             filename = url.split('/')[-1]
             filename = valid_image_name(filename)
             try:
-                urllib.request.urlretrieve(url, location + filename)
+                size = urllib.request.urlopen(url).info()['Content-Length']
+                if size < 10000000:
+                    urllib.request.urlretrieve(url, location + filename)
             except:
                 print('Error')
 
@@ -46,7 +48,7 @@ def fix_imgur_link(link):
 
 def main():
     print("Starting call...")
-    r = setup('elementary-os:earthporn-scraper:v0.2 (by /u/k0nsi)')
+    r = setup('elementary-os:earthporn-scraper:v0.3 (by /u/k0nsi)')
     subs = get_subs('earthporn', 8, r)
     download_subs(subs, './')
 
