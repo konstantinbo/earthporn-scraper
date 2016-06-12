@@ -1,3 +1,3 @@
 = Small script for scraping beautiful photos from /r/earthporn and similar subreddits
 
-image:https://travis-ci.com/konstantinbo/earthporn-scraper.svg?token=LiqALUv98wAx5suKympD&branch=master["Build Status", link="https://travis-ci.com/konstantinbo/earthporn-scraper"]
+image:https://travis-ci.org/konstantinbo/earthporn-scraper.svg?branch=master["Build Status", link="https://travis-ci.org/konstantinbo/earthporn-scraper"]
