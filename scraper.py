@@ -28,7 +28,7 @@ def download_subs(subs, location):
             filename = valid_image_name(filename)
             try:
                 size = urllib.request.urlopen(url).info()['Content-Length']
-                if size < 10000000:
+                if int(size) < 10000000:
                     urllib.request.urlretrieve(url, location + filename)
             except:
                 print('Error')
