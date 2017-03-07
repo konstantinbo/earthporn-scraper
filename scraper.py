@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
-
-import praw, re, urllib
+import praw, re, urllib, datetime
 
 
 def setup(user_agent):
@@ -15,7 +13,7 @@ def get_subs(name, limit, r):
 
 def download_subs(subs, location):
     loop = 0
-    regexp = re.compile(r'((https://i\.)|(\.jpg)$|imgur)')
+    regexp = re.compile('((https:\/\/i\.)|(\.jpg)$|imgur)')
     for x in subs:
         loop += 1
         url = x.url
@@ -27,11 +25,12 @@ def download_subs(subs, location):
             filename = url.split('/')[-1]
             filename = valid_image_name(filename)
             try:
-                size = urllib.request.urlopen(url).info()['Content-Length']
+                size = urllib.urlopen(url).info()['Content-Length']
+                print('Size is ' + size)
                 if int(size) < 10000000:
-                    urllib.request.urlretrieve(url, location + filename)
-            except:
-                print('Error')
+                    urllib.urlretrieve(url, location + filename)
+            except Exception, e:
+                print(str(e))
 
 
 def valid_image_name(filename):
@@ -47,13 +46,16 @@ def fix_imgur_link(link):
 
 
 def main():
+    print('==================================')
+    print('Start time: ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
     print("Starting call...")
-    r = setup('elementary-os:earthporn-scraper:v0.3 (by /u/k0nsi)')
+    r = setup('raspbian:earthporn-scraper:v0.4 (by /u/k0nsi)')
     subs = get_subs('earthporn', 8, r)
-    download_subs(subs, './')
+    download_subs(subs, '/home/osmc/Pictures/Alle_Fotos/')
+    print('Finished at ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
+    print('==================================')
+    print('\n')
 
 
 if __name__ == '__main__':
     main()
-
-

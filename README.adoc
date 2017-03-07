@@ -1,3 +1,10 @@
 = Small script for scraping beautiful photos from /r/earthporn and similar subreddits
 
 image:https://travis-ci.org/konstantinbo/earthporn-scraper.svg?branch=master["Build Status", link="https://travis-ci.org/konstantinbo/earthporn-scraper"]
+
+Currently in use on the following configuration:
+
+* a Raspberry 1
+* with https://osmc.tv/[OSMC]
+* python 2.7.9
+* and the following cronjob: `@reboot  sleep 60 && /usr/bin/python /home/osmc/documents/scraper.py >> /home/osmc/reddit_scraper1.log 2>&1`
