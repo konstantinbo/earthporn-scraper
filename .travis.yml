@@ -2,7 +2,7 @@ language: python
 python:
   - "2.7"
 #install dependencies
-install: pip install praw==3.5.0
+install: pip install praw==4.5.1
 #run script
 script: python scraper.py
 
