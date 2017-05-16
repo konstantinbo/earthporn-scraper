@@ -9,7 +9,8 @@ def setup():
 
 
 def get_subs(name, limit, r):
-    submissions = r.get_subreddit(name).get_hot(limit=limit)
+    sub = r.subreddit(name)
+    submissions = sub.hot(limit = limit)
     return submissions
 
 
