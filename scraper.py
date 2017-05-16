@@ -1,8 +1,10 @@
 import praw, re, urllib, datetime
 
 
-def setup(user_agent):
-    r = praw.Reddit(user_agent=user_agent)
+def setup():
+    r = praw.Reddit(client_id='H82-1wtXMFzcqw',
+                    client_secret='RcylXJtK-XCNRVp84sMnJaHSYPc',
+                    user_agent='osmc:earthporn-scraper:v0.5 (by /u/k0nsi)')
     return r
 
 
@@ -49,7 +51,7 @@ def main():
     print('==================================')
     print('Start time: ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
     print("Starting call...")
-    r = setup('raspbian:earthporn-scraper:v0.4 (by /u/k0nsi)')
+    r = setup()
     subs = get_subs('earthporn', 8, r)
     download_subs(subs, '/home/osmc/Pictures/Alle_Fotos/')
     print('Finished at ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
