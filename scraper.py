@@ -2,9 +2,7 @@ import praw, re, urllib, datetime
 
 
 def setup():
-    r = praw.Reddit(client_id='H82-1wtXMFzcqw',
-                    client_secret='RcylXJtK-XCNRVp84sMnJaHSYPc',
-                    user_agent='osmc:earthporn-scraper:v0.5 (by /u/k0nsi)')
+    r = praw.Reddit('reddit_dev', user_agent='osmc:earthporn-scraper:v0.5 (by /u/k0nsi)')
     return r
 
 
