@@ -6,9 +6,13 @@ def setup():
     return r
 
 
-def get_subs(name, limit, r):
-    sub = r.subreddit(name)
-    submissions = sub.hot(limit = limit)
+def get_subs(subs, limit, r):
+    submissions = list()
+
+    for sub in subs:
+        subr = r.subreddit(sub)
+        links = subr.hot(limit=limit)
+        submissions.extend(links)
     return submissions
 
 
@@ -47,12 +51,13 @@ def fix_imgur_link(link):
 
 
 def main():
+    subs = ['earthporn', 'villageporn', 'houseporn']
     print('==================================')
     print('Start time: ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
     print("Starting call...")
     r = setup()
-    subs = get_subs('earthporn', 8, r)
-    download_subs(subs, '/home/osmc/Pictures/Alle_Fotos/')
+    links = get_subs(subs, 8, r)
+    download_subs(links, '/home/osmc/Pictures/Alle_Fotos/')
     print('Finished at ' + datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S'))
     print('==================================')
     print('\n')
